@@ -1,0 +1,187 @@
+
+body {
+  font: 12px/1.5 arial;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+  color: #ffffff;
+}
+
+div {
+  text-align: left;
+}
+
+.add_content {
+  width: 454px;
+  background: #000000;
+  background-color: #000000;
+  box-shadow: 0 10px 15px 0 rgba(57, 63, 76, 0.12);
+  border-radius: 4px;
+  position: relative;
+  border: 1px solid rgba(57, 63, 76, 0.07);
+  top: 25px;
+  color: #ffffff !important;
+  left: 47px;
+  z-index: 104;
+  overflow-y: scroll;
+  height: 384px;
+}
+
+.add_heard {
+  height: 48px;
+  line-height: 48px;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #2c2f33;
+  border-bottom: 1px solid rgba(57, 63, 76, 0.07);
+}
+
+.add_content .nav > li > a {
+  position: relative;
+  display: block;
+  opacity: 0.5;
+  padding: 0px 15px;
+}
+
+.add_value {
+  width: 15%;
+  float: left;
+  margin-top: 5px;
+  text-align: center;
+  cursor: pointer;
+  height: fit-content;
+  display: inline-block;
+  font-size: 15px;
+}
+
+.add_value.active {
+  background-color: #c4cdd5;
+}
+
+.add_alphabet {
+  width: 5%;
+  margin-top: 5px;
+  float: left;
+  display: inline-block;
+  color: #808080;
+  font-weight: bold;
+}
+
+.add_content .nav-pills > li.active > a, .add_content .nav-pills > li.active > a:hover, .add_content .nav-pills > li.active > a:focus {
+  color: #ffffff !important;
+  background-color: transparent !important;
+  opacity: 0.5 !important;
+}
+
+.add_body {
+  padding: 0px;
+}
+
+.add_content .nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.nav-pills > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills > li {
+  float: left;
+}
+
+.nav-pills > li > a {
+  border-radius: 4px;
+}
+
+li {
+  list-style-type: none;
+  list-style: none;
+}
+
+/*字母*/
+.pad-0 {
+  padding: 0px !important;
+  display: inline-block;
+}
+
+.col-xs-2 {
+  width: 10%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  font-size: 20px;
+}
+
+.col-xs-10 {
+  float: left;
+  width: 100%;
+  height: fit-content;
+}
+
+input{
+  border: none;
+  outline: none;
+}
+.tl-price-input{
+  width: 200px;
+  border: 1px solid #ccc;
+  padding: 7px 0;
+  background: #F4F4F7;
+  border-radius: 3px;
+  padding-left:5px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+}
+.tl-price-input:focus{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+.add_city{
+  width: 70%;
+  height: fit-content;
+  display: inline-block;
+  float: left;
+  position: relative;
+}
+
+.city{
+  width: 25%;
+  float: left;
+  margin-top: 5px;
+  text-align: center;
+  color: #66afe9;
+  cursor: pointer;
+}
+.add_dist{
+  width: 25%;
+
+  display: inline-block;
+  z-index: 99999;
+
+}
+.dist{
+  position: absolute;
+  float: left;
+}

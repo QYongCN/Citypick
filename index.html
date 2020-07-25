@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>distpicker</title>
+    <link rel="stylesheet" href="css/dist.css" />
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/dist.js"></script>
+    <script src="js/zh2Pinyin.js"></script>
+    <script src="js/myDistpicker.js"></script>
+    <!-- import cesium -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.69/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.69/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+    <style>
+        ::-webkit-scrollbar {display:none}
+    </style>
+</head>
+<body>
+
+<div style="height: 5px;">
+
+</div>
+    <div id="contain" style="position:absolute; z-index: 999999; float: left">
+        <span style="color: white; font-size: 20px; font-family: 'Microsoft soft'">省市区</span>
+        <input class="tl-price-input" placeholder="选择省/市/区"  readonly id="dist">
+    </div>
+    <div id="mainContainer" class="fullsize" style="position: relative"></div>
+
+    <script>
+        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyNWUyNzY0NS1lOWE2LTQ5MzEtOTQxMy1lNzA2ZmE5ODIxN2IiLCJpZCI6ODE1NSwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU1MTMzNDU3Mn0.Tq-r4SrmKaz7FgxWibJjtSuzDRqLb6c6bWG2xx7B7Gc';
+
+        var viewer = new Cesium.Viewer('mainContainer',
+            {
+                animation:false,
+                timeline:false,
+                geocoder:false,
+                homeButton: false,
+                scene3DOnly: true,
+                fullscreenButton:false,
+                baseLayerPicker: false,
+                navigationHelpButton: false,
+                infoBox: false,
+            });
+    </script>
+</body>
+<script>
+    $(function () {
+        $("#dist").myDistpicker({
+            stopBy: '#contain'
+        });
+    })
+</script>
+</html>
