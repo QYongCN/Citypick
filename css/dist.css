@@ -163,7 +163,7 @@ input{
   height: fit-content;
   display: inline-block;
   float: left;
-  position: relative;
+  /*position: relative;*/
 }
 
 .city{
@@ -175,13 +175,29 @@ input{
   cursor: pointer;
 }
 .add_dist{
-  width: 25%;
-
+  width: 100%;
+  position: relative;
   display: inline-block;
-  z-index: 99999;
+  height: fit-content;
+
 
 }
 .dist{
-  position: absolute;
+  width: 100%;
   float: left;
+  margin-top: 5px;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  color: #666699;
+}
+
+.rec{
+  width: 60px;
+  height: 100px;
+  position: absolute;
+  background: #000000;
+  z-index: 99999999999999;
+  display: none;
+  overflow-y: scroll;
 }

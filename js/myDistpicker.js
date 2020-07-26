@@ -142,7 +142,7 @@
             $(settings.stopBy).append(
                 '<div class=\'add_content hidden\' id=\'add_content\'>' +
                 '<div class=\'add_body col-xs-12\'>' +
-                '</div></div>'
+                '</div>'+'</div>'
             );
 
             showTitle();
@@ -226,7 +226,8 @@
             $('#add_content').removeClass('hidden');
             clickProvince();
             clickCity();
-            autoClose();
+            clickDist();
+            // autoClose();
         });
 
         /**
@@ -296,7 +297,7 @@
             });
             html = empty ? "" : html;
             $(".add_body").html(html);
-            // mouseCity()
+
         };
 
 
@@ -313,6 +314,7 @@
                     settings.provinceId = id;
                 }
                 console.log(id)
+
                 // 隐藏信息
                 var titleObj = $(".dist-title").find("[data-label=" + label + "]");
                 titleObj.text(ob.text());
@@ -335,6 +337,8 @@
                 var id = ob.data('id');
                 console.log(id);
 
+                var provinceid = parseInt(id/10000)*10000;
+
                 label = ob.data("label");
                 ob.siblings().removeClass('active');
                 ob.addClass("active");
@@ -342,6 +346,79 @@
                     settings.cityId = id;
                 }
                 // 隐藏信息
+
+                var titleObj = $(".dist-title").find("[data-label=" + "province" + "]");
+                titleObj.text(DISTRICTS[100000][provinceid]);
+                titleObj.attr("data-code", provinceid);
+                titleObj.nextAll('span').text("");
+                titleObj.nextAll('span').attr("data-code", "");
+
+                var titleObj = $(".dist-title").find("[data-label=" + label + "]");
+                titleObj.text(ob.text());
+                titleObj.attr("data-code", id);
+                titleObj.nextAll('span').text("");
+                titleObj.nextAll('span').attr("data-code", "");
+
+
+                showTitle();
+
+
+
+
+                var html = '';
+                var distArr = DISTRICTS[id];
+                html += '<div class=\'add_dist\'>';
+                $.each(distArr, function (k, v) {
+                    html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
+                });
+                html += '</div>';
+                var divtop = $(this).offset().top;
+                var divleft = $(this).offset().left;
+                var divheight = $(this).height();
+
+                $("#rec").css("top",divtop+divheight);
+                $("#rec").css("left",divleft+20)
+                document.getElementById('rec').innerHTML = html;
+                $("#rec").css("display","block");
+
+                mouseDist();
+                mouseCity();
+
+            })
+        };
+
+        /**
+         * 点击选择区县
+         */
+        var clickDist = function () {
+            // 点击
+            $(".rec").off("click").on("click", '.dist', function () {
+                var ob = $(this);
+                var id = ob.data('id');
+                console.log(id);
+
+                var provinceid = parseInt(id/10000)*10000;
+                var cityid = parseInt(id/100)*100;
+
+                label = ob.data("label");
+                ob.siblings().removeClass('active');
+                ob.addClass("active");
+                if (label == 'city') {
+                    settings.cityId = id;
+                }
+                // 隐藏信息
+                var titleObj = $(".dist-title").find("[data-label=" + "province" + "]");
+                titleObj.text(DISTRICTS[100000][provinceid]);
+                titleObj.attr("data-code", provinceid);
+                titleObj.nextAll('span').text("");
+                titleObj.nextAll('span').attr("data-code", "");
+
+                var titleObj = $(".dist-title").find("[data-label=" + "city" + "]");
+                titleObj.text(DISTRICTS[provinceid][cityid]);
+                titleObj.attr("data-code", cityid);
+                titleObj.nextAll('span').text("");
+                titleObj.nextAll('span').attr("data-code", "");
+
                 var titleObj = $(".dist-title").find("[data-label=" + label + "]");
                 titleObj.text(ob.text());
                 titleObj.attr("data-code", id);
@@ -350,35 +427,31 @@
 
                 showTitle();
 
-
             })
         };
 
+
+        /**
+         * 鼠标滑动事件
+         */
+
         var mouseCity = function () {
-            var obj = $('.city');
+            var obj = $('.add_name');
             obj.each(function(i){
                 //注意:this是js对象,$(this)是jquery对象.
                 $(this).mouseover(function(e) {
-                    var html = '';
-                    var id = $(this).data('id');
-                    var distArr = DISTRICTS[id];
-                    // html += '<div class=\'add_dist\'>';
-                    $.each(distArr, function (k, v) {
-                        html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
-                    });
-                    // html += '</div>'
-                    // $(this).html(html)
-                    // document.getElementById(id).innerHTML = html;
-                    var pid = $(this).parent().data('id')
-                    console.log($(this))
+                    document.getElementById('rec').style.display='none'
                 }).mouseout(function(e) {
-                    document.getElementById('dist').style.display='none'
+
                 });
             });
-
-
         };
+        var mouseDist = function () {
+                $(".rec").off("mouseleave").on("mouseleave", '.add_dist', function () {
 
+                    document.getElementById('rec').style.display='none'
+                })
+            };
 
 
         /**
