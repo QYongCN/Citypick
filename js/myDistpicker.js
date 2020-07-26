@@ -227,7 +227,7 @@
             clickProvince();
             clickCity();
             clickDist();
-            // autoClose();
+            autoClose();
         });
 
         /**
@@ -449,7 +449,7 @@
         var mouseDist = function () {
                 $(".rec").off("mouseleave").on("mouseleave", '.add_dist', function () {
 
-                    document.getElementById('rec').style.display='none'
+                    document.getElementById('rec').style.display='none';
                 })
             };
 
@@ -464,6 +464,7 @@
                     $('#add_content').removeClass('hidden');
                 } else if (!$('#add_content').hasClass('hidden')) {
                     $('#add_content').addClass('hidden');
+                    document.getElementById('rec').style.display='none'
                 }
             })
         }
