@@ -176,8 +176,11 @@
                 if (!v) {
                     return false;
                 }
-
-                temp = $.pinYin.toPinYin(v);
+                if (v == "重庆市"){
+                    temp = "chongqingshi";
+                }else{
+                    temp = $.pinYin.toPinYin(v);
+                }
 
                 // DISTRICTS[id][i]
                 fallName = v + "|" + temp + "|" + temp.substr(0, 1);
@@ -209,6 +212,7 @@
             });
         };
 
+
         // 默认展示省份
         groupCity(100000);
 
@@ -227,7 +231,7 @@
             clickProvince();
             clickCity();
             clickDist();
-            autoClose();
+            // autoClose();
         });
 
         /**
@@ -297,7 +301,8 @@
             });
             html = empty ? "" : html;
             $(".add_body").html(html);
-
+            mouseCity();
+            autoClose();
         };
 
 
@@ -362,28 +367,6 @@
 
                 showTitle();
 
-
-
-
-                var html = '';
-                var distArr = DISTRICTS[id];
-                html += '<div class=\'add_dist\'>';
-                $.each(distArr, function (k, v) {
-                    html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
-                });
-                html += '</div>';
-                var divtop = $(this).offset().top;
-                var divleft = $(this).offset().left;
-                var divheight = $(this).height();
-
-                $("#rec").css("top",divtop+divheight);
-                $("#rec").css("left",divleft+20)
-                document.getElementById('rec').innerHTML = html;
-                $("#rec").css("display","block");
-
-                mouseDist();
-                mouseCity();
-
             })
         };
 
@@ -436,38 +419,75 @@
          */
 
         var mouseCity = function () {
-            var obj = $('.add_name');
+            var obj = $('.add_city');
             obj.each(function(i){
                 //注意:this是js对象,$(this)是jquery对象.
-                $(this).mouseover(function(e) {
-                    document.getElementById('rec').style.display='none'
+                $('.city').mouseover(function(e) {
+                    var ob = $(this);
+                    var id = ob.data('id');
+
+
+                    var html = '';
+                    var distArr = DISTRICTS[id];
+                    html += '<div class=\'add_dist\'>';
+                    $.each(distArr, function (k, v) {
+                        html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
+                    });
+                    html += '</div>';
+                    var divtop = $(this).offset().top;
+                    var divleft = $(this).offset().left;
+
+
+                    $("#rec").css("top",divtop);
+                    $("#rec").css("left",divleft+50);
+                    document.getElementById('rec').innerHTML = html;
+                    $("#rec").css("display","block");
+
+
                 }).mouseout(function(e) {
+                    var outTimer = setTimeout(function () {
+                        $("#rec").css("display","none");
+                    },2000)
+                    $(".rec").on("mouseenter", '.add_dist', function () {
+                        clearTimeout(outTimer)
+                        $("#rec").css("display","block");
+                        $(".rec").on("mouseleave", '.add_dist', function () {
+                            $("#rec").css("display","none");
+                        });
+                        $(".add_content").on("mouseenter", '.add_name', function () {
+                            $("#rec").css("display","none");
+                        });
+                    });
+
 
                 });
             });
         };
-        var mouseDist = function () {
-                $(".rec").off("mouseleave").on("mouseleave", '.add_dist', function () {
-
-                    document.getElementById('rec').style.display='none';
-                })
-            };
 
 
         /**
          * 选区自动关闭
          */
         var autoClose = function () {
-            $(document).click(function (e) {
-                var $target = $(e.target);
-                if ($this.is($target) || $('#add_content').find($target).length > 0 || $target.hasClass('add_value')) {
-                    $('#add_content').removeClass('hidden');
-                } else if (!$('#add_content').hasClass('hidden')) {
-                    $('#add_content').addClass('hidden');
-                    document.getElementById('rec').style.display='none'
+            var mouseX;
+            var mouseY;
+            var left = $('.add_content').offset().left;
+            var top = $('.add_content').offset().top;
+            var right = $('.add_content').outerWidth(true) + left;
+            var down = $('.add_content').outerHeight(true) + top;
+            $('body').mousemove(function (event) {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
+                if (mouseX>right || mouseY>down || mouseX<top || mouseY<left){
+                    $('.add_content').addClass("hidden");
+                    $('.rec').css("display", "none");
                 }
-            })
-        }
+
+            });
+
+        };
+
+
     };
 
     $.fn.myDistpicker = myDistpicker;
