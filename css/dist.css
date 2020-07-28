@@ -27,6 +27,7 @@ div {
   z-index: 104;
   overflow-y: scroll;
   height: 384px;
+  opacity: 0.5;
 }
 
 .add_heard {
@@ -200,4 +201,16 @@ input{
   z-index: 99999999999999;
   display: none;
   overflow-y: scroll;
+}
+.tip{
+  width: 200px;
+  max-height: 150px;
+  background: white;
+  z-index: 9999999999999999999999999999999;
+  position: absolute;
+  overflow-y: scroll;
+}
+.tipinfo{
+  width: 100%;
+  cursor: pointer;
 }

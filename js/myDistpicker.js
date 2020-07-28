@@ -11,6 +11,7 @@
     }
 })(function ($, DISTRICTS) {
 
+
     'use strict';
 
     if (typeof DISTRICTS === 'undefined') {
@@ -320,6 +321,7 @@
                 }
                 console.log(id)
 
+
                 // 隐藏信息
                 var titleObj = $(".dist-title").find("[data-label=" + label + "]");
                 titleObj.text(ob.text());
@@ -447,7 +449,7 @@
                 }).mouseout(function(e) {
                     var outTimer = setTimeout(function () {
                         $("#rec").css("display","none");
-                    },2000)
+                    },3000)
                     $(".rec").on("mouseenter", '.add_dist', function () {
                         clearTimeout(outTimer)
                         $("#rec").css("display","block");
@@ -464,6 +466,13 @@
             });
         };
 
+
+        $(".add_content").on('mouseenter','.add_value',function () {
+            $('.rec').css("display", "none");
+        });
+        $(".add_content").on('mouseenter','.add_body',function () {
+            $('.rec').css("display", "none");
+        });
 
         /**
          * 选区自动关闭

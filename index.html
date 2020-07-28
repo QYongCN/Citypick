@@ -8,6 +8,8 @@
     <script src="js/dist.js"></script>
     <script src="js/zh2Pinyin.js"></script>
     <script src="js/myDistpicker.js"></script>
+    <script src="js/namepacdic.js"></script>
+
     <!-- import cesium -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.69/Build/Cesium/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.69/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
@@ -18,12 +20,14 @@
 </head>
 <body>
 <div id="rec" class="rec"></div>
+<div id="tip" class="hidden tip"></div>
 <div style="height: 5px;">
 
 </div>
     <div id="contain" style="position:absolute; z-index: 999999; float: left">
         <span style="color: white; font-size: 20px; font-family: 'Microsoft soft'">省市区</span>
-        <input class="tl-price-input" placeholder="选择省/市/区"  readonly id="dist">
+        <input class="tl-price-input" placeholder="选择省/市/区"  id="dist">
+        <button id="bt">搜索</button>
     </div>
 
     <div id="mainContainer" class="fullsize" style="position: relative"></div>
@@ -52,4 +56,5 @@
         });
     })
 </script>
+<script src="js/searchCity.js"></script>
 </html>
