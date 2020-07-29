@@ -21,14 +21,22 @@
 <body>
 <div id="rec" class="rec"></div>
 <div id="tip" class="hidden tip"></div>
-<div style="height: 5px;">
+<div id="showcontent" class="showcontent hidden" style="float: left; position: absolute"></div>
+<div id="positioncity" class="City" style="position: absolute; top: 20%; right: 42%; background-color: rgba(62, 29, 51, 0.4); z-index: 999999999">
+    <div id="contain" style="z-index: 999999; float: left">
+        <!--    <span style="color: white; font-size: 20px; font-family: 'Microsoft soft'">省市区</span>-->
+        <input class="tl-price-input" placeholder="选择省/市/区县"  id="dist">
+        <!--        <button id="bt">搜索</button>-->
+    </div>
+    <div class="CityTitle" style="padding: 5px 10px;cursor: pointer;width: 80px;height: 30px;float: left" >
+        <img src="images/dingwei.png" alt="dingw" style="width: 15px;">
+        <span style="color: white">中国</span>
+    </div>
+    <div style="float: left">
+        <button type="button" class="btn btn-primary" style="position: relative; background-color: rgba(62, 29, 51, 0)">其他数据</button>
+    </div>
 
 </div>
-    <div id="contain" style="position:absolute; z-index: 999999; float: left">
-        <span style="color: white; font-size: 20px; font-family: 'Microsoft soft'">省市区</span>
-        <input class="tl-price-input" placeholder="选择省/市/区"  id="dist">
-        <button id="bt">搜索</button>
-    </div>
 
     <div id="mainContainer" class="fullsize" style="position: relative"></div>
 
@@ -52,9 +60,10 @@
 <script>
     $(function () {
         $("#dist").myDistpicker({
-            stopBy: '#contain'
+            stopBy: '#showcontent'
         });
     })
 </script>
 <script src="js/searchCity.js"></script>
+<script src="js/windowsOnResize.js"></script>
 </html>

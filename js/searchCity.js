@@ -23,6 +23,7 @@
      */
     var oTxt = document.getElementById('dist');
 
+
     /**
      * 对回车事件进行监听，当输入完文本框后点击回车触发，得到pac或报错
      */
@@ -62,41 +63,41 @@
      * 获取搜索按钮对象
      * @type {HTMLElement}
      */
-    var searchBtn = document.getElementById('bt');
+    // var searchBtn = document.getElementById('bt');
 
     /**
      * 监听搜索按钮点击事件，得到pac或报错
      */
-    searchBtn.addEventListener('click',function () {
-        var flag = 0;
-        var cont = [];
-        $('#tip').addClass('hidden');
-        var keyword = oTxt.value;
-        $.each(pacDic,function (k, v) {
-            if (k.indexOf(keyword) != -1){
-                if (k.indexOf(keyword)==0){
-                    flag += 1;
-                    cont.push(v);
-                }
-            }
-        });
-        if (flag==1){
-            console.log(cont[0])
-        }else {
-            var html = '';
-            var top = $('#contain').offset().top;
-            var left = $('#contain').offset().left;
-            $('#tip').css('top',top+35);
-            $('#tip').css('left',left+65);
-            $('#tip').removeClass('hidden');
-            html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
-            document.getElementById('tip').innerHTML = html;
-            setTimeout(function () {
-                $("#tip").addClass('hidden')
-            },3000);
-
-        }
-    });
+    // searchBtn.addEventListener('click',function () {
+    //     var flag = 0;
+    //     var cont = [];
+    //     $('#tip').addClass('hidden');
+    //     var keyword = oTxt.value;
+    //     $.each(pacDic,function (k, v) {
+    //         if (k.indexOf(keyword) != -1){
+    //             if (k.indexOf(keyword)==0){
+    //                 flag += 1;
+    //                 cont.push(v);
+    //             }
+    //         }
+    //     });
+    //     if (flag==1){
+    //         console.log(cont[0])
+    //     }else {
+    //         var html = '';
+    //         var top = $('#contain').offset().top;
+    //         var left = $('#contain').offset().left;
+    //         $('#tip').css('top',top+35);
+    //         $('#tip').css('left',left+65);
+    //         $('#tip').removeClass('hidden');
+    //         html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
+    //         document.getElementById('tip').innerHTML = html;
+    //         setTimeout(function () {
+    //             $("#tip").addClass('hidden')
+    //         },3000);
+    //
+    //     }
+    // });
 
     /**
      * 在进行中文输入时不进行搜索
@@ -113,15 +114,16 @@
         console.log('汉字搜索')
         var keyword = oTxt.value;
 
-        var top = $('#contain').offset().top;
-        var left = $('#contain').offset().left;
+        var X = document.getElementById('positioncity').getBoundingClientRect().left;
+        var Y = document.getElementById('positioncity').getBoundingClientRect().top;
+        var H = document.getElementById('positioncity').getBoundingClientRect().height;
 
         var html = '';
         $.each(pacDic,function (k, v) {
             if (k.search(keyword) != -1){
                 flag = 1;
-                $('#tip').css('top',top+35);
-                $('#tip').css('left',left+65);
+                $('#tip').css('top',Y+H-7);
+                $('#tip').css('left',X);
                 $('#tip').removeClass('hidden');
                 html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
             }
@@ -136,8 +138,9 @@
      * 实时监听文本框内容
      */
     $("#dist").bind("input propertychange",function(event){
-        var top = $('#contain').offset().top;
-        var left = $('#contain').offset().left;
+        var X = document.getElementById('positioncity').getBoundingClientRect().left;
+        var Y = document.getElementById('positioncity').getBoundingClientRect().top;
+        var H = document.getElementById('positioncity').getBoundingClientRect().height;
         var html = '';
         var keyword = $("#dist").val();
         var flag = 0;
@@ -147,8 +150,8 @@
             $.each(pacDic,function (k, v) {
                 if (k.search(keyword) != -1){
                     flag = 1;
-                    $('#tip').css('top',top+35);
-                    $('#tip').css('left',left+65);
+                    $('#tip').css('top',Y+H-7);
+                    $('#tip').css('left',X);
                     $('#tip').removeClass('hidden');
                     html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
                 }

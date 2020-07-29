@@ -17,19 +17,18 @@ div {
  */
 .add_content {
   width: 454px;
-  background: #000000;
-  /*background-color: #000000;*/
-  box-shadow: 0 10px 15px 0 rgba(57, 63, 76, 0.12);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.13);
   border-radius: 4px;
   position: relative;
-  border: 1px solid rgba(57, 63, 76, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   top: 25px;
   color: #ffffff !important;
   left: 47px;
   z-index: 104;
   overflow-y: scroll;
   height: 384px;
-  opacity: 1;
+  opacity:1;
 }
 
 .add_heard {
@@ -47,7 +46,7 @@ div {
 .add_content .nav > li > a {
   position: relative;
   display: block;
-  opacity: 0.5;
+  opacity:0.5;
   padding: 0px 15px;
 }
 
@@ -63,7 +62,7 @@ div {
   height: fit-content;
   display: inline-block;
   font-size: 15px;
-  color: #ffffff;
+  color: white;
 }
 
 .add_value.active {
@@ -183,7 +182,8 @@ input{
   float: left;
   margin-top: 5px;
   text-align: center;
-  color: #66afe9;
+  /*color: #66afe9;*/
+  color: #00B7FF;
   cursor: pointer;
 }
 .add_dist{
@@ -204,14 +204,14 @@ input{
   text-align: center;
   cursor: pointer;
   display: inline-block;
-  color: #66ff00;
+  color: #33ff33;
 }
 
 .rec{
   width: 50px;
   height: 100px;
   position: absolute;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.35);
   z-index: 99999999999999;
   display: none;
   overflow-y: scroll;

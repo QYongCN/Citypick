@@ -217,16 +217,23 @@
         // 默认展示省份
         groupCity(100000);
 
-
         // 绑定元素事件，展示地区
         $this.off("click").on("click", function () {
             if (!$('#add_content').hasClass("hidden")) {
                 return false;
             }
 
-            $(".dist-tab").find('li').removeClass('active');
-            $(".dist-tab").find("li[data-label=province]").addClass("active");
             showCity();
+
+            var X = document.getElementById('positioncity').getBoundingClientRect().left;
+            var Y = document.getElementById('positioncity').getBoundingClientRect().top;
+            var H = document.getElementById('positioncity').getBoundingClientRect().height;
+            var W = document.getElementById('positioncity').getBoundingClientRect().width;
+
+
+            $('#showcontent').css('top',Y + H - 20);
+            $('#showcontent').css('left',X-50);
+            $('#showcontent').removeClass('hidden');
 
             $('#add_content').removeClass('hidden');
             clickProvince();
@@ -424,6 +431,7 @@
 
         var mouseCity = function () {
             var outTimer;
+            var outTimerCity;
             var obj = $('.add_city');
 
             obj.on('mouseenter', '.city', function () {
@@ -447,22 +455,26 @@
             });
 
             obj.on('mouseleave', '.city', function () {
-                outTimer = setTimeout(function () {
-                    $("#rec").css("display","none");
-                }, 2000);
+                // outTimerCity = setTimeout(function () {
+                //     $("#rec").css("display","none");
+                // }, 2000);
                 $('body').on('mouseenter', '.add_dist', function () {
-                    clearTimeout(outTimer);
+                    // clearTimeout(outTimerCity)
                     $("#rec").css("display","block");
                 });
-                // $('body').on('mouseleave', '.add_dist', function () {
-                //     $("#rec").css("display","none");
-                // });
 
-            })
+            });
+            $('body').on('mouseleave', '.add_dist', function () {
+                outTimer = setTimeout(function () {
+                    $("#rec").css("display","none");
+                }, 100)
 
-            $('.add_content').on('mouseenter', '.add_value', function () {
-                $("#rec").css("display","none");
-            })
+                $('.add_city').on('mouseenter', '.city', function () {
+                    clearTimeout(outTimer);
+                    $("#rec").css("display","block");
+                })
+            });
+
 
 
 
@@ -474,22 +486,29 @@
         var autoClose = function () {
             var mouseX;
             var mouseY;
-            var left = $('.add_content').offset().left;
-            var top = $('.add_content').offset().top;
-            var right = $('.add_content').outerWidth(true) + left+20;
-            var down = $('.add_content').outerHeight(true) + top+150;
+            var X = document.getElementById('positioncity').getBoundingClientRect().left;
+            var Y = document.getElementById('positioncity').getBoundingClientRect().top;
+            var H = document.getElementById('positioncity').getBoundingClientRect().height;
+            var W = document.getElementById('positioncity').getBoundingClientRect().width;
+
             $('body').mousemove(function (event) {
                 mouseX = event.pageX;
                 mouseY = event.pageY;
-                if (mouseX>right || mouseY>down || mouseX<top || mouseY<left){
-                    $('.add_content').addClass("hidden");
-                    $('.rec').css("display", "none");
+                if (mouseX>X && mouseX<X+W && mouseY>Y && mouseY< Y+H){
+                    var Timer = setTimeout(function () {
+                        $('.showcontent').addClass("hidden");
+                        $('.add_content').addClass("hidden");
+                        $('.rec').css("display", "none");
+                    },3000)
+                    $('body').on('mouseenter', '.showcontent', function () {
+                        clearTimeout(Timer);
+                    })
                 }
 
-            });
-
+            })
 
         };
+
 
 
     };
