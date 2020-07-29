@@ -313,6 +313,7 @@
         var clickProvince = function () {
             // 点击
             $(".add_body").off("click").on("click", '.add_value', function () {
+                $('#tip').addClass('hidden');
                 var ob = $(this);
                 var id = ob.data('id')
                     label = ob.data("label");
@@ -340,6 +341,7 @@
         var clickCity = function () {
             // 点击
             $(".add_city").off("click").on("click", '.city', function () {
+                $('#tip').addClass('hidden');
                 var ob = $(this);
                 var id = ob.data('id');
                 console.log(id);
@@ -378,6 +380,7 @@
         var clickDist = function () {
             // 点击
             $(".rec").off("click").on("click", '.dist', function () {
+                $('#tip').addClass('hidden');
                 var ob = $(this);
                 var id = ob.data('id');
                 console.log(id);

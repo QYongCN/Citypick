@@ -12,7 +12,9 @@ a {
 div {
   text-align: left;
 }
-
+/**
+ 整个控件的底层
+ */
 .add_content {
   width: 454px;
   background: #000000;
@@ -27,7 +29,7 @@ div {
   z-index: 104;
   overflow-y: scroll;
   height: 384px;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .add_heard {
@@ -49,6 +51,9 @@ div {
   padding: 0px 15px;
 }
 
+/**
+省的样式
+ */
 .add_value {
   width: 15%;
   float: left;
@@ -58,12 +63,15 @@ div {
   height: fit-content;
   display: inline-block;
   font-size: 15px;
+  color: #ffffff;
 }
 
 .add_value.active {
   background-color: #c4cdd5;
 }
-
+/**
+字母的样式
+ */
 .add_alphabet {
   width: 5%;
   margin-top: 5px;
@@ -166,13 +174,17 @@ input{
   float: left;
   /*position: relative;*/
 }
+/**
+地级市样式
+ */
 
 .city{
   width: 25%;
   float: left;
   margin-top: 5px;
   text-align: center;
-  color: #66afe9;
+  /*color: #66afe9;*/
+  color: #ffffff;
   cursor: pointer;
 }
 .add_dist{
@@ -183,6 +195,9 @@ input{
   padding: 0 0 0 0;
 
 }
+/**
+县级样式
+ */
 .dist{
   width: 100%;
   float: left;
