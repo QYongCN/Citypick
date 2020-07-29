@@ -18,7 +18,7 @@ div {
 .add_content {
   width: 454px;
   background: #000000;
-  background-color: #000000;
+  /*background-color: #000000;*/
   box-shadow: 0 10px 15px 0 rgba(57, 63, 76, 0.12);
   border-radius: 4px;
   position: relative;
@@ -183,8 +183,7 @@ input{
   float: left;
   margin-top: 5px;
   text-align: center;
-  /*color: #66afe9;*/
-  color: #ffffff;
+  color: #66afe9;
   cursor: pointer;
 }
 .add_dist{
@@ -212,7 +211,7 @@ input{
   width: 50px;
   height: 100px;
   position: absolute;
-  background: #000000;
+  background: rgba(0, 0, 0, 0);
   z-index: 99999999999999;
   display: none;
   overflow-y: scroll;

@@ -43,7 +43,17 @@
             if (flag==1){
                 console.log(cont[0])
             }else {
-                alert("信息不完整或存在重名地区，请精确填写")
+                var html = '';
+                var top = $('#contain').offset().top;
+                var left = $('#contain').offset().left;
+                $('#tip').css('top',top+35);
+                $('#tip').css('left',left+65);
+                $('#tip').removeClass('hidden');
+                html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
+                document.getElementById('tip').innerHTML = html;
+                setTimeout(function () {
+                    $("#tip").addClass('hidden')
+                },3000);
             }
         }
     });
@@ -73,7 +83,18 @@
         if (flag==1){
             console.log(cont[0])
         }else {
-            alert("信息不完整或存在重名地区，请精确填写")
+            var html = '';
+            var top = $('#contain').offset().top;
+            var left = $('#contain').offset().left;
+            $('#tip').css('top',top+35);
+            $('#tip').css('left',left+65);
+            $('#tip').removeClass('hidden');
+            html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
+            document.getElementById('tip').innerHTML = html;
+            setTimeout(function () {
+                $("#tip").addClass('hidden')
+            },3000);
+
         }
     });
 
@@ -101,7 +122,7 @@
                 flag = 1;
                 $('#tip').css('top',top+35);
                 $('#tip').css('left',left+65);
-                $('#tip').removeClass('hidden')
+                $('#tip').removeClass('hidden');
                 html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
             }
         });

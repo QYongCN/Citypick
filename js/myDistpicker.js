@@ -232,7 +232,6 @@
             clickProvince();
             clickCity();
             clickDist();
-            // autoClose();
         });
 
         /**
@@ -320,7 +319,7 @@
                 if (label == 'province') {
                     settings.provinceId = id;
                 }
-                console.log(id)
+                console.log(id);
 
 
                 // 隐藏信息
@@ -424,58 +423,50 @@
          */
 
         var mouseCity = function () {
+            var outTimer;
             var obj = $('.add_city');
-            obj.each(function(i){
-                //注意:this是js对象,$(this)是jquery对象.
-                $('.city').mouseover(function(e) {
-                    var ob = $(this);
-                    var id = ob.data('id');
 
+            obj.on('mouseenter', '.city', function () {
+                var ob = $(this);
+                var id = ob.data('id');
 
-                    var html = '';
-                    var distArr = DISTRICTS[id];
-                    html += '<div class=\'add_dist\'>';
-                    $.each(distArr, function (k, v) {
-                        html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
-                    });
-                    html += '</div>';
-                    var divtop = $(this).offset().top;
-                    var divleft = $(this).offset().left;
-
-
-                    $("#rec").css("top",divtop);
-                    $("#rec").css("left",divleft+50);
-                    document.getElementById('rec').innerHTML = html;
-                    $("#rec").css("display","block");
-
-
-                }).mouseout(function(e) {
-                    var outTimer = setTimeout(function () {
-                        $("#rec").css("display","none");
-                    },3000)
-                    $(".rec").on("mouseenter", '.add_dist', function () {
-                        clearTimeout(outTimer)
-                        $("#rec").css("display","block");
-                        $(".rec").on("mouseleave", '.add_dist', function () {
-                            $("#rec").css("display","none");
-                        });
-                        $(".add_content").on("mouseenter", '.add_name', function () {
-                            $("#rec").css("display","none");
-                        });
-                    });
-
-
+                var html = '';
+                var distArr = DISTRICTS[id];
+                html += '<div class=\'add_dist\'>';
+                $.each(distArr, function (k, v) {
+                    html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
                 });
+                html += '</div>';
+                var divtop = $(this).offset().top;
+                var divleft = $(this).offset().left;
+
+                $("#rec").css("top",divtop);
+                $("#rec").css("left",divleft+55);
+                document.getElementById('rec').innerHTML = html;
+                $("#rec").css("display","block");
             });
+
+            obj.on('mouseleave', '.city', function () {
+                outTimer = setTimeout(function () {
+                    $("#rec").css("display","none");
+                }, 2000);
+                $('body').on('mouseenter', '.add_dist', function () {
+                    clearTimeout(outTimer);
+                    $("#rec").css("display","block");
+                });
+                // $('body').on('mouseleave', '.add_dist', function () {
+                //     $("#rec").css("display","none");
+                // });
+
+            })
+
+            $('.add_content').on('mouseenter', '.add_value', function () {
+                $("#rec").css("display","none");
+            })
+
+
+
         };
-
-
-        $(".add_content").on('mouseenter','.add_value',function () {
-            $('.rec').css("display", "none");
-        });
-        $(".add_content").on('mouseenter','.add_body',function () {
-            $('.rec').css("display", "none");
-        });
 
         /**
          * 选区自动关闭
@@ -485,8 +476,8 @@
             var mouseY;
             var left = $('.add_content').offset().left;
             var top = $('.add_content').offset().top;
-            var right = $('.add_content').outerWidth(true) + left;
-            var down = $('.add_content').outerHeight(true) + top;
+            var right = $('.add_content').outerWidth(true) + left+20;
+            var down = $('.add_content').outerHeight(true) + top+150;
             $('body').mousemove(function (event) {
                 mouseX = event.pageX;
                 mouseY = event.pageY;
@@ -496,6 +487,7 @@
                 }
 
             });
+
 
         };
 
