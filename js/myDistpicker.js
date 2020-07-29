@@ -507,6 +507,17 @@
 
             })
 
+            $('body').on('mouseleave', '.showcontent', function () {
+                var timer = setTimeout(function () {
+                    $('.showcontent').addClass("hidden");
+                    $('.add_content').addClass("hidden");
+                    $('.rec').css("display", "none");
+                },500)
+                $('body').on('mouseenter', '.rec', function () {
+                    clearTimeout(timer);
+                })
+            })
+
         };
 
 
