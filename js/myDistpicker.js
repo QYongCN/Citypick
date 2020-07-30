@@ -236,6 +236,7 @@
             $('#showcontent').removeClass('hidden');
 
             $('#add_content').removeClass('hidden');
+            $('#tip').addClass('hidden');
             clickProvince();
             clickCity();
             clickDist();
@@ -309,6 +310,7 @@
             html = empty ? "" : html;
             $(".add_body").html(html);
             mouseCity();
+            wheelContent();
             autoClose();
         };
 
@@ -431,7 +433,6 @@
 
         var mouseCity = function () {
             var outTimer;
-            var outTimerCity;
             var obj = $('.add_city');
 
             obj.on('mouseenter', '.city', function () {
@@ -455,13 +456,14 @@
             });
 
             obj.on('mouseleave', '.city', function () {
-                // outTimerCity = setTimeout(function () {
-                //     $("#rec").css("display","none");
-                // }, 2000);
+                var outTimerCity = setTimeout(function () {
+                    $("#rec").css("display","none");
+                }, 1000);
                 $('body').on('mouseenter', '.add_dist', function () {
-                    // clearTimeout(outTimerCity)
+                    clearTimeout(outTimerCity)
                     $("#rec").css("display","block");
                 });
+
 
             });
             $('body').on('mouseleave', '.add_dist', function () {
@@ -475,10 +477,27 @@
                 })
             });
 
-
+            $('.add_content').on('mouseenter', '.add_value', function () {
+                $("#rec").css("display","none");
+            })
 
 
         };
+
+        /**
+         * 鼠标滚轮监听
+         */
+        var wheelContent = function () {
+            var wheel = document.getElementById('add_content');
+            wheel.addEventListener('mousewheel', function (event) {
+                $("#rec").css("display","none");
+            });
+        };
+
+
+
+
+
 
         /**
          * 选区自动关闭
