@@ -217,6 +217,7 @@
         // 默认展示省份
         groupCity(100000);
 
+
         // 绑定元素事件，展示地区
         $this.off("click").on("click", function () {
             if (!$('#add_content').hasClass("hidden")) {
@@ -228,15 +229,22 @@
             var X = document.getElementById('positioncity').getBoundingClientRect().left;
             var Y = document.getElementById('positioncity').getBoundingClientRect().top;
             var H = document.getElementById('positioncity').getBoundingClientRect().height;
-            var W = document.getElementById('positioncity').getBoundingClientRect().width;
 
-
-            $('#showcontent').css('top',Y + H - 20);
+            $('#showcontent').css('top',Y + H-20);
             $('#showcontent').css('left',X-50);
             $('#showcontent').removeClass('hidden');
-
             $('#add_content').removeClass('hidden');
             $('#tip').addClass('hidden');
+
+            var outtimer = setTimeout(function () {
+                $('#showcontent').addClass('hidden');
+                $('#add_content').addClass('hidden');
+            }, 3000);
+
+            $('body').on('mouseenter', '.showcontent', function () {
+               clearTimeout(outtimer);
+            });
+
             clickProvince();
             clickCity();
             clickDist();
@@ -458,7 +466,7 @@
             obj.on('mouseleave', '.city', function () {
                 var outTimerCity = setTimeout(function () {
                     $("#rec").css("display","none");
-                }, 1000);
+                }, 2000);
                 $('body').on('mouseenter', '.add_dist', function () {
                     clearTimeout(outTimerCity)
                     $("#rec").css("display","block");
@@ -503,28 +511,28 @@
          * 选区自动关闭
          */
         var autoClose = function () {
-            var mouseX;
-            var mouseY;
-            var X = document.getElementById('positioncity').getBoundingClientRect().left;
-            var Y = document.getElementById('positioncity').getBoundingClientRect().top;
-            var H = document.getElementById('positioncity').getBoundingClientRect().height;
-            var W = document.getElementById('positioncity').getBoundingClientRect().width;
+            // var mouseX;
+            // var mouseY;
+            // var X = document.getElementById('positioncity').getBoundingClientRect().left;
+            // var Y = document.getElementById('positioncity').getBoundingClientRect().top;
+            // var H = document.getElementById('positioncity').getBoundingClientRect().height;
+            // var W = document.getElementById('positioncity').getBoundingClientRect().width;
 
-            $('body').mousemove(function (event) {
-                mouseX = event.pageX;
-                mouseY = event.pageY;
-                if (mouseX>X && mouseX<X+W && mouseY>Y && mouseY< Y+H){
-                    var Timer = setTimeout(function () {
-                        $('.showcontent').addClass("hidden");
-                        $('.add_content').addClass("hidden");
-                        $('.rec').css("display", "none");
-                    },3000)
-                    $('body').on('mouseenter', '.showcontent', function () {
-                        clearTimeout(Timer);
-                    })
-                }
-
-            })
+            // $('body').mousemove(function (event) {
+            //     mouseX = event.pageX;
+            //     mouseY = event.pageY;
+            //     if (mouseX>X && mouseX<X+W && mouseY>Y && mouseY< Y+H){
+            //         var Timer = setTimeout(function () {
+            //             $('.showcontent').addClass("hidden");
+            //             $('.add_content').addClass("hidden");
+            //             $('.rec').css("display", "none");
+            //         },3000)
+            //         $('body').on('mouseenter', '.showcontent', function () {
+            //             clearTimeout(Timer);
+            //         })
+            //     }
+            //
+            // })
 
             $('body').on('mouseleave', '.showcontent', function () {
                 var timer = setTimeout(function () {
