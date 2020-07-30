@@ -216,7 +216,9 @@
 
         // 默认展示省份
         groupCity(100000);
-
+        var X = document.getElementById('contain').getBoundingClientRect().left;
+        var Y = document.getElementById('contain').getBoundingClientRect().top;
+        var H = document.getElementById('contain').getBoundingClientRect().height;
 
         // 绑定元素事件，展示地区
         $this.off("click").on("click", function () {
@@ -226,15 +228,43 @@
 
             showCity();
 
-            var X = document.getElementById('positioncity').getBoundingClientRect().left;
-            var Y = document.getElementById('positioncity').getBoundingClientRect().top;
-            var H = document.getElementById('positioncity').getBoundingClientRect().height;
 
             $('#showcontent').css('top',Y + H-20);
             $('#showcontent').css('left',X-50);
             $('#showcontent').removeClass('hidden');
             $('#add_content').removeClass('hidden');
-            $('#tip').addClass('hidden');
+            var tipTimer = setTimeout(function () {
+                $('#tip').addClass('hidden');
+            },2000);
+
+            $('body').on('mouseenter', '.tip', function () {
+                clearTimeout(tipTimer);
+            });
+
+            var keyword = $("#dist").val();
+            var html = '';
+            var flag = 0;
+            if(keyword == ""){
+                $('#tip').removeClass('hidden');
+            }else {
+                $.each(pacDic,function (k, v) {
+                    if (k.search(keyword) != -1){
+                        flag = 1;
+                        $('#tip').removeClass('hidden');
+                        html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
+                    }
+                });
+                document.getElementById('tip').innerHTML = html;
+                if (flag==0){
+                    $('#tip').css('top',Y+H-7);
+                    $('#tip').css('left',X);
+                    $('#tip').addClass('hidden');
+                }else {
+                    $('#tip').removeClass('hidden');
+                }
+            }
+
+
 
             var outtimer = setTimeout(function () {
                 $('#showcontent').addClass('hidden');
@@ -243,6 +273,7 @@
 
             $('body').on('mouseenter', '.showcontent', function () {
                clearTimeout(outtimer);
+                $('#tip').addClass('hidden');
             });
 
             clickProvince();
@@ -464,11 +495,11 @@
             });
 
             obj.on('mouseleave', '.city', function () {
-                var outTimerCity = setTimeout(function () {
-                    $("#rec").css("display","none");
-                }, 2000);
+                // var outTimerCity = setTimeout(function () {
+                //     $("#rec").css("display","none");
+                // }, 2000);
                 $('body').on('mouseenter', '.add_dist', function () {
-                    clearTimeout(outTimerCity)
+                    // clearTimeout(outTimerCity)
                     $("#rec").css("display","block");
                 });
 

@@ -114,15 +114,15 @@
         console.log('汉字搜索')
         var keyword = oTxt.value;
 
-        var X = document.getElementById('positioncity').getBoundingClientRect().left;
-        var Y = document.getElementById('positioncity').getBoundingClientRect().top;
-        var H = document.getElementById('positioncity').getBoundingClientRect().height;
+        var X = document.getElementById('contain').getBoundingClientRect().left;
+        var Y = document.getElementById('contain').getBoundingClientRect().top;
+        var H = document.getElementById('contain').getBoundingClientRect().height;
 
         var html = '';
         $.each(pacDic,function (k, v) {
             if (k.search(keyword) != -1){
                 flag = 1;
-                $('#tip').css('top',Y+H-7);
+                $('#tip').css('top',Y+H);
                 $('#tip').css('left',X);
                 $('#tip').removeClass('hidden');
                 html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
@@ -138,9 +138,9 @@
      * 实时监听文本框内容
      */
     $("#dist").bind("input propertychange",function(event){
-        var X = document.getElementById('positioncity').getBoundingClientRect().left;
-        var Y = document.getElementById('positioncity').getBoundingClientRect().top;
-        var H = document.getElementById('positioncity').getBoundingClientRect().height;
+        var X = document.getElementById('contain').getBoundingClientRect().left;
+        var Y = document.getElementById('contain').getBoundingClientRect().top;
+        var H = document.getElementById('contain').getBoundingClientRect().height;
         var html = '';
         var keyword = $("#dist").val();
         var flag = 0;
@@ -150,13 +150,13 @@
             $.each(pacDic,function (k, v) {
                 if (k.search(keyword) != -1){
                     flag = 1;
-                    $('#tip').css('top',Y+H-7);
+                    $('#tip').css('top',Y+H);
                     $('#tip').css('left',X);
                     $('#tip').removeClass('hidden');
                     html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
                 }
             });
-            document.getElementById('tip').innerHTML = html
+            document.getElementById('tip').innerHTML = html;
             if (flag==0){
                 $('#tip').addClass('hidden');
             }
