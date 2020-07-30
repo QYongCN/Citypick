@@ -45,10 +45,11 @@
                 console.log(cont[0])
             }else {
                 var html = '';
-                var top = $('#contain').offset().top;
-                var left = $('#contain').offset().left;
-                $('#tip').css('top',top+35);
-                $('#tip').css('left',left+65);
+                var X = document.getElementById('contain').getBoundingClientRect().left;
+                var Y = document.getElementById('contain').getBoundingClientRect().top;
+                var H = document.getElementById('contain').getBoundingClientRect().height;
+                $('#tip').css('top',Y+H);
+                $('#tip').css('left',X);
                 $('#tip').removeClass('hidden');
                 html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
                 document.getElementById('tip').innerHTML = html;
