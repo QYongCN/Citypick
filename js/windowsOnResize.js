@@ -6,7 +6,7 @@ window.onresize = function(){
     $('#showcontent').css('left',X-50);
     $('#showcontent').removeClass('hidden');
 
-    $('#tip').css('top',Y+H);
-    $('#tip').css('left',X);
+    $('#cityChooseTip').css('top',Y+H);
+    $('#cityChooseTip').css('left',X);
 
 }

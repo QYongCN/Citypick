@@ -216,7 +216,7 @@ input{
   display: none;
   overflow-y: scroll;
 }
-.tip{
+.cityChooseTip{
   width: 200px;
   max-height: 150px;
   background: white;

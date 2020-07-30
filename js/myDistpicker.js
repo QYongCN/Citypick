@@ -234,10 +234,10 @@
             $('#showcontent').removeClass('hidden');
             $('#add_content').removeClass('hidden');
             var tipTimer = setTimeout(function () {
-                $('#tip').addClass('hidden');
+                $('#cityChooseTip').addClass('hidden');
             },2000);
 
-            $('body').on('mouseenter', '.tip', function () {
+            $('body').on('mouseenter', '.cityChooseTip', function () {
                 clearTimeout(tipTimer);
             });
 
@@ -245,22 +245,22 @@
             var html = '';
             var flag = 0;
             if(keyword == ""){
-                $('#tip').removeClass('hidden');
+                $('#cityChooseTip').removeClass('hidden');
             }else {
                 $.each(pacDic,function (k, v) {
                     if (k.search(keyword) != -1){
                         flag = 1;
-                        $('#tip').removeClass('hidden');
+                        $('#cityChooseTip').removeClass('hidden');
                         html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
                     }
                 });
-                document.getElementById('tip').innerHTML = html;
+                document.getElementById('cityChooseTip').innerHTML = html;
                 if (flag==0){
-                    $('#tip').css('top',Y+H-7);
-                    $('#tip').css('left',X);
-                    $('#tip').addClass('hidden');
+                    $('#cityChooseTip').css('top',Y+H-7);
+                    $('#cityChooseTip').css('left',X);
+                    $('#cityChooseTip').addClass('hidden');
                 }else {
-                    $('#tip').removeClass('hidden');
+                    $('#cityChooseTip').removeClass('hidden');
                 }
             }
 
@@ -273,7 +273,7 @@
 
             $('body').on('mouseenter', '.showcontent', function () {
                clearTimeout(outtimer);
-                $('#tip').addClass('hidden');
+                $('#cityChooseTip').addClass('hidden');
             });
 
             clickProvince();
@@ -360,7 +360,7 @@
         var clickProvince = function () {
             // 点击
             $(".add_body").off("click").on("click", '.add_value', function () {
-                $('#tip').addClass('hidden');
+                $('#cityChooseTip').addClass('hidden');
                 var ob = $(this);
                 var id = ob.data('id')
                     label = ob.data("label");
@@ -388,7 +388,7 @@
         var clickCity = function () {
             // 点击
             $(".add_city").off("click").on("click", '.city', function () {
-                $('#tip').addClass('hidden');
+                $('#cityChooseTip').addClass('hidden');
                 var ob = $(this);
                 var id = ob.data('id');
                 console.log(id);
@@ -427,7 +427,7 @@
         var clickDist = function () {
             // 点击
             $(".rec").off("click").on("click", '.dist', function () {
-                $('#tip').addClass('hidden');
+                $('#cityChooseTip').addClass('hidden');
                 var ob = $(this);
                 var id = ob.data('id');
                 console.log(id);

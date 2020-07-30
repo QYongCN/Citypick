@@ -32,7 +32,7 @@
         var cont = [];
         if (e.keyCode ==13){
             var keyword = oTxt.value;
-            $('#tip').addClass('hidden');
+            $('#cityChooseTip').addClass('hidden');
             $.each(pacDic,function (k, v) {
                 if (k.indexOf(keyword) != -1){
                     if (k.indexOf(keyword)==0){
@@ -48,13 +48,13 @@
                 var X = document.getElementById('contain').getBoundingClientRect().left;
                 var Y = document.getElementById('contain').getBoundingClientRect().top;
                 var H = document.getElementById('contain').getBoundingClientRect().height;
-                $('#tip').css('top',Y+H);
-                $('#tip').css('left',X);
-                $('#tip').removeClass('hidden');
+                $('#cityChooseTip').css('top',Y+H);
+                $('#cityChooseTip').css('left',X);
+                $('#cityChooseTip').removeClass('hidden');
                 html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
-                document.getElementById('tip').innerHTML = html;
+                document.getElementById('cityChooseTip').innerHTML = html;
                 setTimeout(function () {
-                    $("#tip").addClass('hidden')
+                    $("#cityChooseTip").addClass('hidden')
                 },3000);
             }
         }
@@ -72,7 +72,7 @@
     // searchBtn.addEventListener('click',function () {
     //     var flag = 0;
     //     var cont = [];
-    //     $('#tip').addClass('hidden');
+    //     $('#cityChooseTip').addClass('hidden');
     //     var keyword = oTxt.value;
     //     $.each(pacDic,function (k, v) {
     //         if (k.indexOf(keyword) != -1){
@@ -88,13 +88,13 @@
     //         var html = '';
     //         var top = $('#contain').offset().top;
     //         var left = $('#contain').offset().left;
-    //         $('#tip').css('top',top+35);
-    //         $('#tip').css('left',left+65);
-    //         $('#tip').removeClass('hidden');
+    //         $('#cityChooseTip').css('top',top+35);
+    //         $('#cityChooseTip').css('left',left+65);
+    //         $('#cityChooseTip').removeClass('hidden');
     //         html += '<div class=\'tipinfo\'>' + "<--信息不完整或存在重名地区，请精确填写-->" +'</div>';
-    //         document.getElementById('tip').innerHTML = html;
+    //         document.getElementById('cityChooseTip').innerHTML = html;
     //         setTimeout(function () {
-    //             $("#tip").addClass('hidden')
+    //             $("#cityChooseTip").addClass('hidden')
     //         },3000);
     //
     //     }
@@ -123,16 +123,16 @@
         $.each(pacDic,function (k, v) {
             if (k.search(keyword) != -1){
                 flag = 1;
-                $('#tip').css('top',Y+H);
-                $('#tip').css('left',X);
-                $('#tip').removeClass('hidden');
+                $('#cityChooseTip').css('top',Y+H);
+                $('#cityChooseTip').css('left',X);
+                $('#cityChooseTip').removeClass('hidden');
                 html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
             }
         });
         if (flag==0){
-            $('#tip').addClass('hidden')
+            $('#cityChooseTip').addClass('hidden')
         }
-        document.getElementById('tip').innerHTML = html
+        document.getElementById('cityChooseTip').innerHTML = html
     });
 
     /**
@@ -146,20 +146,20 @@
         var keyword = $("#dist").val();
         var flag = 0;
         if (keyword==""){
-            $('#tip').addClass('hidden');
+            $('#cityChooseTip').addClass('hidden');
         }else {
             $.each(pacDic,function (k, v) {
                 if (k.search(keyword) != -1){
                     flag = 1;
-                    $('#tip').css('top',Y+H);
-                    $('#tip').css('left',X);
-                    $('#tip').removeClass('hidden');
+                    $('#cityChooseTip').css('top',Y+H);
+                    $('#cityChooseTip').css('left',X);
+                    $('#cityChooseTip').removeClass('hidden');
                     html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
                 }
             });
-            document.getElementById('tip').innerHTML = html;
+            document.getElementById('cityChooseTip').innerHTML = html;
             if (flag==0){
-                $('#tip').addClass('hidden');
+                $('#cityChooseTip').addClass('hidden');
             }
         }
 
@@ -168,11 +168,11 @@
     /**
      * 点击搜索提示框内容后，提示框隐藏，同时传出PAC，文本框显示输入内容
      */
-    $('.tip').on("click", '.tipinfo', function () {
+    $('.cityChooseTip').on("click", '.tipinfo', function () {
         var ob = $(this);
         var id = ob.data('id');
         console.log(id);
-        $('.tip').addClass('hidden');
+        $('.cityChooseTip').addClass('hidden');
         // 隐藏信息
         var titleObj = $(".dist-title").find("[data-label=" + "province" + "]");
         titleObj.text(ob.text());
@@ -188,7 +188,7 @@
      * 点击页面任意点，搜索提示框隐藏
      */
     $('body').on("click", ".fullsize", function () {
-        $('.tip').addClass('hidden');
+        $('.cityChooseTip').addClass('hidden');
     });
 
     /**
