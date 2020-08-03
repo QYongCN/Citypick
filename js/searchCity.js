@@ -23,6 +23,9 @@
      */
     var oTxt = document.getElementById('dist');
 
+    var searchContent = [];
+    var num = 0;
+    var gundong = document.getElementById('cityChooseTip');
 
     /**
      * 对回车事件进行监听，当输入完文本框后点击回车触发，得到pac或报错
@@ -30,6 +33,7 @@
     oTxt.addEventListener('keydown',function (e) {
         var flag = 0;
         var cont = [];
+        // 回车
         if (e.keyCode ==13){
             var keyword = oTxt.value;
             $('#cityChooseTip').addClass('hidden');
@@ -58,7 +62,61 @@
                 },3000);
             }
         }
+
+        //方向上键
+        if (e.keyCode == 38){
+            num --;
+            if (num < 0){
+                num = searchContent.length-1;
+                document.getElementById(searchContent[num]).style.background= '#00B7FF';
+                document.getElementById(searchContent[0]).style.background= '#ffffff';
+
+            }else {
+                document.getElementById(searchContent[num]).style.background= '#00B7FF';
+                document.getElementById(searchContent[num+1]).style.background= '#ffffff';
+                gundong.scrollTop -= 8;
+            }
+            $.each(pacDic, function (k, v) {
+                if (v == searchContent[num]){
+                    console.log(k);
+
+                    $('#dist').val(k);
+                    return false;
+                }
+            });
+
+
+        }
+
+        //方向下键
+        if (e.keyCode == 40){
+            if (num == 0){
+                document.getElementById(searchContent[num]).style.background= '#00B7FF';
+            }else if (num> searchContent.length-1){
+                document.getElementById(searchContent[num-1]).style.background= '#ffffff';
+                num = 0;
+                document.getElementById(searchContent[num]).style.background= '#00B7FF';
+
+            }else {
+                document.getElementById(searchContent[num-1]).style.background= '#ffffff';
+                document.getElementById(searchContent[num]).style.background= '#00B7FF';
+                gundong.scrollTop += 8;
+            }
+            $.each(pacDic, function (k, v) {
+               if (v == searchContent[num]){
+                   console.log(k);
+                   $('#dist').val(k);
+                   return false;
+               }
+            });
+
+            num ++;
+
+        }
+
+
     });
+
 
     /**
      * 获取搜索按钮对象
@@ -111,6 +169,7 @@
      * 汉字输入完成后进行搜索
      */
     $('#dist').on('compositionend', function (event) {
+        num = 0;
         var flag = 0;
         console.log('汉字搜索')
         var keyword = oTxt.value;
@@ -126,7 +185,8 @@
                 $('#cityChooseTip').css('top',Y+H);
                 $('#cityChooseTip').css('left',X);
                 $('#cityChooseTip').removeClass('hidden');
-                html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
+                html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>';
+                searchContent.push(v);
             }
         });
         if (flag==0){
@@ -139,12 +199,14 @@
      * 实时监听文本框内容
      */
     $("#dist").bind("input propertychange",function(event){
+        num = 0;
         var X = document.getElementById('contain').getBoundingClientRect().left;
         var Y = document.getElementById('contain').getBoundingClientRect().top;
         var H = document.getElementById('contain').getBoundingClientRect().height;
         var html = '';
         var keyword = $("#dist").val();
         var flag = 0;
+        searchContent.splice(0, searchContent.length);
         if (keyword==""){
             $('#cityChooseTip').addClass('hidden');
         }else {
@@ -155,6 +217,7 @@
                     $('#cityChooseTip').css('left',X);
                     $('#cityChooseTip').removeClass('hidden');
                     html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>'
+                    searchContent.push(v)
                 }
             });
             document.getElementById('cityChooseTip').innerHTML = html;
@@ -205,5 +268,7 @@
         });
         $('#dist').val(showName);
     };
+
+
 
 });

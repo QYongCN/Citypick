@@ -233,13 +233,13 @@
             $('#showcontent').css('left',X-50);
             $('#showcontent').removeClass('hidden');
             $('#add_content').removeClass('hidden');
-            var tipTimer = setTimeout(function () {
-                $('#cityChooseTip').addClass('hidden');
-            },2000);
-
-            $('body').on('mouseenter', '.cityChooseTip', function () {
-                clearTimeout(tipTimer);
-            });
+            // var tipTimer = setTimeout(function () {
+            //     $('#cityChooseTip').addClass('hidden');
+            // },2000);
+            //
+            // $('body').on('mouseenter', '.cityChooseTip', function () {
+            //     clearTimeout(tipTimer);
+            // });
 
             var keyword = $("#dist").val();
             var html = '';
