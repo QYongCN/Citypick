@@ -45,6 +45,7 @@
                     }
                 }
             });
+            $('.cityChooseTip').empty();
             if (flag==1){
                 console.log(cont[0])
             }else {
@@ -65,6 +66,15 @@
 
         //方向上键
         if (e.keyCode == 38){
+            if (e&&e.preventDefault)
+            {
+                e.preventDefault();
+            }
+            else
+            {
+                window.event.returnValue = false;
+            }
+
             num --;
             if (num < 0){
                 num = searchContent.length-1;
@@ -78,8 +88,6 @@
             }
             $.each(pacDic, function (k, v) {
                 if (v == searchContent[num]){
-                    console.log(k);
-
                     $('#dist').val(k);
                     return false;
                 }
@@ -90,9 +98,18 @@
 
         //方向下键
         if (e.keyCode == 40){
+            if (e&&e.preventDefault)
+            {
+                e.preventDefault();
+            }
+            else
+            {
+                window.event.returnValue = false;
+            }
+
             if (num == 0){
                 document.getElementById(searchContent[num]).style.background= '#00B7FF';
-            }else if (num> searchContent.length-1){
+            }else if (num > searchContent.length-1){
                 document.getElementById(searchContent[num-1]).style.background= '#ffffff';
                 num = 0;
                 document.getElementById(searchContent[num]).style.background= '#00B7FF';
@@ -104,7 +121,6 @@
             }
             $.each(pacDic, function (k, v) {
                if (v == searchContent[num]){
-                   console.log(k);
                    $('#dist').val(k);
                    return false;
                }
@@ -158,42 +174,42 @@
     //     }
     // });
 
-    /**
-     * 在进行中文输入时不进行搜索
-     */
-    $('#dist').on('compositionstart', function () {
-        console.log("不搜索")
-    });
-
-    /**
-     * 汉字输入完成后进行搜索
-     */
-    $('#dist').on('compositionend', function (event) {
-        num = 0;
-        var flag = 0;
-        console.log('汉字搜索')
-        var keyword = oTxt.value;
-
-        var X = document.getElementById('contain').getBoundingClientRect().left;
-        var Y = document.getElementById('contain').getBoundingClientRect().top;
-        var H = document.getElementById('contain').getBoundingClientRect().height;
-
-        var html = '';
-        $.each(pacDic,function (k, v) {
-            if (k.search(keyword) != -1){
-                flag = 1;
-                $('#cityChooseTip').css('top',Y+H);
-                $('#cityChooseTip').css('left',X);
-                $('#cityChooseTip').removeClass('hidden');
-                html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>';
-                searchContent.push(v);
-            }
-        });
-        if (flag==0){
-            $('#cityChooseTip').addClass('hidden')
-        }
-        document.getElementById('cityChooseTip').innerHTML = html
-    });
+    // /**
+    //  * 在进行中文输入时不进行搜索
+    //  */
+    // $('#dist').on('compositionstart', function () {
+    //     console.log("不搜索")
+    // });
+    //
+    // /**
+    //  * 汉字输入完成后进行搜索
+    //  */
+    // $('#dist').on('compositionend', function (event) {
+    //     num = 0;
+    //     var flag = 0;
+    //     console.log('汉字搜索')
+    //     var keyword = oTxt.value;
+    //
+    //     var X = document.getElementById('contain').getBoundingClientRect().left;
+    //     var Y = document.getElementById('contain').getBoundingClientRect().top;
+    //     var H = document.getElementById('contain').getBoundingClientRect().height;
+    //
+    //     var html = '';
+    //     $.each(pacDic,function (k, v) {
+    //         if (k.search(keyword) != -1){
+    //             flag = 1;
+    //             $('#cityChooseTip').css('top',Y+H);
+    //             $('#cityChooseTip').css('left',X);
+    //             $('#cityChooseTip').removeClass('hidden');
+    //             html += '<div id=\''+v+'\' data-id="'+v+'" class=\'tipinfo\'>' + k +'</div>';
+    //             searchContent.push(v);
+    //         }
+    //     });
+    //     if (flag==0){
+    //         $('#cityChooseTip').addClass('hidden')
+    //     }
+    //     document.getElementById('cityChooseTip').innerHTML = html
+    // });
 
     /**
      * 实时监听文本框内容
