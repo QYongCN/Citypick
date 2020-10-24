@@ -480,18 +480,23 @@
 
                 var html = '';
                 var distArr = DISTRICTS[id];
-                html += '<div class=\'add_dist\'>';
-                $.each(distArr, function (k, v) {
-                    html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
-                });
-                html += '</div>';
-                var divtop = $(this).offset().top;
-                var divleft = $(this).offset().left;
+                if (distArr===undefined){
+                    $("#rec").css("display","none");
+                }else {
+                    html += '<div class=\'add_dist\'>';
+                    $.each(distArr, function (k, v) {
+                        html += '<div id="' +k+ '" data-id="' + k + '" data-label="dist" class=\'dist\' >' + v + '</div>';
+                    });
+                    html += '</div>';
+                    var divtop = $(this).offset().top;
+                    var divleft = $(this).offset().left;
 
-                $("#rec").css("top",divtop);
-                $("#rec").css("left",divleft+55);
-                document.getElementById('rec').innerHTML = html;
-                $("#rec").css("display","block");
+                    $("#rec").css("top",divtop);
+                    $("#rec").css("left",divleft+55);
+                    document.getElementById('rec').innerHTML = html;
+                    $("#rec").css("display","block");
+                }
+
             });
 
             obj.on('mouseleave', '.city', function () {
@@ -505,22 +510,19 @@
 
 
             });
-            $('body').on('mouseleave', '.add_dist', function () {
-                outTimer = setTimeout(function () {
-                    $("#rec").css("display","none");
-                }, 100)
-
-                $('.add_city').on('mouseenter', '.city', function () {
-                    clearTimeout(outTimer);
-                    $("#rec").css("display","block");
-                })
-            });
 
             $('.add_content').on('mouseenter', '.add_value', function () {
                 $("#rec").css("display","none");
-            })
+            });
 
+            $('.add_content').on('mouseleave','.add_city', function () {
+                $("#rec").css("display","none");
+            });
 
+            $('body').on('mouseleave', '.add_dist', function () {
+                $("#rec").css("display","none");
+            });
+            
         };
 
         /**
