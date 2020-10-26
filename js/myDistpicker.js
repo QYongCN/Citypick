@@ -522,7 +522,7 @@
             $('body').on('mouseleave', '.add_dist', function () {
                 $("#rec").css("display","none");
             });
-            
+
         };
 
         /**
